@@ -1,0 +1,22 @@
+def ks(m,l,d,n):
+    k=[[0 for x in range(m+1)] for j in range(n+1)]
+    for i in range(n+1):
+        for j in range(m+1):
+            if i==0 or j==0:
+                k[i][j]=0
+            elif l[i-1]<=j:
+                k[i][j]=max(d[i-1]+k[i-1][j-l[i-1]],k[i-1][j])
+            else:
+                k[i][j]=k[i-1][j]
+    return k[n][m]
+t=int(input())
+while(t>0):
+    l=[]
+    d=[]
+    n,m=list(map(int,input().split(' ')))
+    for i in range(n):
+        w,p=list(map(int,input().split(' ')))
+        l.append(w)
+        d.append(p)
+    print(ks(m,l,d,n))
+    t-=1
